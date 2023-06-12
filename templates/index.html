@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .heading {
+        text-align: center;
+        color: white;
+    }
+
+    .about-section {
+        margin-top: 20px;
+        color: white;
+    }
+
+    #result {
+        color: white;
+    }
+</style>
+
+<h2 class="heading">Image Classifier</h2>
+
+<div>
+    <form id="upload-file" method="post" enctype="multipart/form-data">
+        <label for="imageUpload" class="upload-label">
+            Upload Image for Classification
+        </label>
+        <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+    </form>
+
+    <div class="image-section" style="display:none;">
+        <div class="img-preview">
+            <div id="imagePreview"></div>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary btn-lg" id="btn-predict">Predict!</button>
+        </div>
+    </div>
+
+    <div class="loader" style="display:none;"></div>
+
+    <h3 id="result">
+        <span> </span>
+    </h3>
+
+    <div class="about-section">
+        <h3>About</h3>
+        <p>
+            This web app can detect 6 classes of maize leaf diseases which can be employed in the agriculture industry.
+        </p>
+    </div>
+</div>
+
+<script>
+    // Upload Preview
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                $('#imagePreview').hide();
+                $('#imagePreview').fadeIn(650);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#imageUpload').change(function () {
+        $('.image-section').show();
+        $('#result').text('');
+        $('#result').hide();
+        readURL(this);
+    });
+
+    // Predict Button
+    $('#btn-predict').click(function () {
+        var form_data = new FormData($('#upload-file')[0]);
+        $('#btn-predict').attr('disabled', true);
+        $('.loader').show();
+
+        // Make prediction request
+        $.ajax({
+            type: 'POST',
+            url: '/predict',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            async: true,
+            success: function (data) {
+                $('.loader').hide();
+                $('#result').fadeIn(600);
+                $('#result').text('Prediction: ' + data);
+                console.log('Success!');
+                $('#btn-predict').attr('disabled', false);
+            },
+        });
+    });
+</script>
+
+{% endblock %}
