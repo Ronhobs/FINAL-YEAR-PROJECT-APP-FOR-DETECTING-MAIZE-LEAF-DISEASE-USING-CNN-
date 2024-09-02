@@ -1,4 +1,5 @@
                                         DEVELOPMENT OF A WEB APPLICATION FOR MAIZE LEAF DISEASE CLASSIFICATION USING CNN
+
 This project describes in details a web application for identifying maize leaf disease classification using Convolutional Neural Networks(CNN)
 
 Dataset
@@ -16,7 +17,7 @@ Features
 Upload Image: Users can upload an image of a maize leaf for classification.
 Disease Prediction: The app predicts the disease based on the uploaded image.
 Live Demo
-The web app is hosted here: ttps://project-nx1y.onrender.com/.
+The web app is hosted here: https://project-nx1y.onrender.com/.
 
 Preview
 Here is a screenshot of the web application 
