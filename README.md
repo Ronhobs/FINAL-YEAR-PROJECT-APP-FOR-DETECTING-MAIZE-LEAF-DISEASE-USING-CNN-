@@ -20,7 +20,7 @@ Live Demo
 The web app is hosted here: https://project-nx1y.onrender.com/.
 
 Preview
-Here is a screenshot of the web application 
+Here is a webpage of the maize leaf disease classifier
 ![image](https://github.com/user-attachments/assets/6294fd2d-07fb-4e80-9ea6-28ad50d737ef)
 
 
